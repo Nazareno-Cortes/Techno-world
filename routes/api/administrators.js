@@ -15,7 +15,8 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function(req, res) {
-  var newAdministrator = req.body;
+  var last = _.maxBy(data.list, 'id');
+  var newAdministrator = Object.assign({id: last.id + 1}, req.body);
   data.list.push(newAdministrator);
   saveData(data);
   res.json(data.list);

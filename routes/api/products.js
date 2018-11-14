@@ -32,7 +32,8 @@ router.get('/search/:name', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-  var newProduct = req.body;
+  var last = _.maxBy(data.list, 'id');
+  var newProduct = Object.assign({id: last.id + 1}, req.body);
   data.list.push(newProduct);
   saveData(data);
   res.json(data.list);
